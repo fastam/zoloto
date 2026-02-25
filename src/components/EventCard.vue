@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click="open">
+  <div class="card">
     <img :src="event.image" />
 
     <div class="card-title">{{ event.title }}</div>
@@ -14,12 +14,5 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-const router = useRouter()
-
-const props = defineProps({ event: Object })
-
-const open = () => {
-  router.push(`/event/${props.event.id}`)
-}
+defineProps({ event: Object })
 </script>

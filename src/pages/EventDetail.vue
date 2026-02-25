@@ -1,90 +1,45 @@
 <template>
   <div class="container" v-if="event">
 
-    <!-- HEADER -->
     <div class="header-plate">
-      <button class="back-btn" @click="$router.back()">
-        ←
-      </button>
-
-      <div class="header-title">
-        {{ event.title }}
-      </div>
+      <button class="back-btn" @click="$emit('back')">←</button>
+      <div class="header-title">{{event.title}}</div>
     </div>
 
-    <!-- MAIN CARD -->
     <div class="detail-card">
-
-      <!-- LEFT -->
       <img :src="event.image" class="detail-image"/>
 
-      <!-- RIGHT -->
       <div class="detail-content">
-
         <div class="meta">
-          <div class="meta-item">📅 {{ event.date }}</div>
-          <div class="meta-item">📍 {{ event.location }}</div>
-          <div class="meta-item">👤 {{ event.organizer }}</div>
+          <div class="meta-item">📅 {{event.date}}</div>
+          <div class="meta-item">📍 {{event.location}}</div>
+          <div class="meta-item">👤 {{event.organizer}}</div>
         </div>
 
-        <p class="detail-description">
-          {{ event.fullDescription }}
-        </p>
+        <p class="detail-description">{{event.fullDescription}}</p>
 
-        <div class="tags">
-          <span v-for="t in event.tags" :key="t" class="tag">
-            {{ t }}
-          </span>
-        </div>
-
-        <button class="register-btn">
-          Зарегистрироваться
-        </button>
-
+        <button class="register-btn">Зарегистрироваться</button>
       </div>
     </div>
 
-    <!-- INFO BLOCKS -->
     <div class="info-grid">
-
-      <!-- PARTICIPANTS -->
       <div class="info-card participants">
-        <div class="participants-count">
-          {{ event.participants }}
-        </div>
-
-        <div class="participants-label">
-          уже записалось
-        </div>
+        <div class="participants-count">{{event.participants}}</div>
+        <div class="participants-label">уже записалось</div>
       </div>
 
-      <!-- REQUIREMENTS -->
-      <div class="info-card requirements">
+      <div class="info-card">
         <h3>Требования к участию</h3>
-
-        <p class="info-text">
-          {{ event.requirements }}
-        </p>
+        <p class="info-text">{{event.requirements}}</p>
       </div>
-
     </div>
 
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { useEventsStore } from '../store/events'
-
-const route = useRoute()
-const store = useEventsStore()
-
-onMounted(() => {
-  store.setCurrentEvent(route.params.id)
-})
-
-const event = computed(() => store.currentEvent)
+defineProps({event:Object})
+defineEmits(['back'])
 </script>
 
 <style scoped>
