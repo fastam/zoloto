@@ -34,3 +34,9 @@ defineProps({
   selectedTags:Array
 })
 </script>
+
+<Pagination
+  :total="events.length"
+  :page="1"
+  @change="$emit('changePage',$event)"
+/>
