@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
     <div class="header-bar">
       <div class="title">Мероприятия</div>
 
@@ -21,22 +20,24 @@
       />
     </div>
 
+    <Pagination
+      :total="total"
+      :page="page"
+      @change="$emit('changePage', $event)"
+    />
   </div>
 </template>
 
 <script setup>
 import EventCard from '../components/EventCard.vue'
 import TagFilter from '../components/TagFilter.vue'
+import Pagination from '../components/Pagination.vue'
 
 defineProps({
-  events:Array,
-  tags:Array,
-  selectedTags:Array
+  events: Array,
+  tags: Array,
+  selectedTags: Array,
+  total: Number,
+  page: Number
 })
 </script>
-
-<Pagination
-  :total="events.length"
-  :page="1"
-  @change="$emit('changePage',$event)"
-/>
